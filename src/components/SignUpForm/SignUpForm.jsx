@@ -1,20 +1,56 @@
 import { React, useState } from "react";
 import { Row, Col, Button, Form, Spinner } from "react-bootstrap";
+import { values, size } from "lodash";
+import { toast } from "react-toastify";
+import { isEmailValid } from "../../utils/validations";
+import { signUpApi } from "../../api/auth";
 
 import "./SignUpForm.scss";
 
 export default function SignInForm(props) {
   const { setShowModal } = props;
   const [formData, setFormData] = useState(initialFormValue());
+  const [signUpLoading, setSignUpLoading] = useState(false);
 
-  const onChange = e =>{
-    setFormData({ ...formData, [e.target.name]:e.target.value})
-  }
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    setShowModal(false);
-    console.log(formData)
+    let validCount = 0;
+    values(formData).some((value) => {
+      value && validCount++;
+      return null;
+    });
+    if (validCount !== size(formData)) {
+      toast.warning("Completa todos los campos del formulario");
+    } else if (!isEmailValid(formData.email)) {
+      toast.warning("Email Invalido");
+    } else if (formData.password !== formData.repeatPassword) {
+      toast.warning("Las constraseñas deben ser iguales");
+    } else if (size(formData.password) < 6) {
+      toast.warning("La constraseña debe tener al menos 6 caracteres");
+    } else {
+      setSignUpLoading(true);
+      signUpApi(formData)
+        .then((response) => {
+          if (response.code) {
+            toast.warning(response.message);
+          } else {
+            toast.success("El usuario ha sido registrado exitosamente ");
+            setShowModal(false);
+            setFormData(initialFormValue());
+          }
+        })
+        .catch((err) => {
+          toast.error("Error del servidor, inténtelo más tarde");
+          console.log(err);
+        })
+        .finally(() => {
+          setSignUpLoading(false);
+        });
+    }
   };
   return (
     <div className="sign-up-form">
@@ -34,8 +70,8 @@ export default function SignInForm(props) {
               <Form.Control
                 type="text"
                 placeholder="Apellidos"
-                defaultValue={formData.apellidos}
-                name="apellidos"
+                defaultValue={formData.apellido}
+                name="apellido"
               />
             </Col>
           </Row>
@@ -71,20 +107,19 @@ export default function SignInForm(props) {
           </Row>
         </Form.Group>
         <Button variant="primary" type="submit">
-          Registrarse
+          {!signUpLoading ? "Registrarse" : <Spinner animation="border" />}
         </Button>
       </Form>
     </div>
   );
 }
 
-
-function initialFormValue(){
-  return{
-    nombre:'',
-    apellidos:'',
-    email:'',
-    password:'',
-    repeatPassword:''
-  }
+function initialFormValue() {
+  return {
+    nombre: "",
+    apellido: "",
+    email: "",
+    password: "",
+    repeatPassword: "",
+  };
 }
