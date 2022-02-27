@@ -1,6 +1,8 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-import logoWhite from "../../../assets/png/mic.png";
+import logoWhite from "../../../assets/png/mic-white.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
 
 import "./BasicModal.scss";
 

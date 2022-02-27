@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import BasicModal from "../../components/Modal/BasicModal";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
+import SignInForm from "../../components/SignInForm/SignInForm";
 
 import "./SignInSignUp.scss";
 
@@ -53,7 +54,7 @@ function LeftComponent() {
       <div>
         <h2>
           <FontAwesomeIcon icon={faMicrophone} />
-          Lleva tu carrera como locutor al siguiente nivel
+          Trabaja con las mejores empresas del mundo, en tan sólo un click
         </h2>
         <h2>
           <FontAwesomeIcon icon={faMusic} />
@@ -73,9 +74,7 @@ function RightComponent(props) {
     <Col className="signin-signup__right" xs={6}>
       <div className="">
         <img src={LogoWhite} alt="supervoices" />
-        <h2>
-          Trabaja con las mejores empresas del mundo, en tan sólo un click
-        </h2>
+        <h2>Lleva tu carrera como locutor al siguiente nivel</h2>
         <h3>Únete a Supervoices hoy mismo</h3>
         <Button
           variant="primary"
@@ -85,7 +84,7 @@ function RightComponent(props) {
         </Button>
         <Button
           variant="outline-primary"
-          onClick={() => openModal(<h2>Formulario de login</h2>)}
+          onClick={() => openModal(<SignInForm setShowModal={setShowModal} />)}
         >
           Iniciar sesión
         </Button>
