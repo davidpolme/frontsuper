@@ -1,5 +1,8 @@
-@import '../../scss/index.scss';
+@import "../../scss/index.scss";
 
 .header {
-    
+ .navbar-nav{
+     display : flex;
+     justify-content: flex-end !important;
+ }
 }

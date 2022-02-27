@@ -4,7 +4,7 @@ import Footer from "../../components/Footer";
 import { Container } from "react-bootstrap";
 
 const Layout = ({ className, children }) => (
-  <Container className={`layout ${className}`}>
+  <Container fluid className={`p-0 layout ${className}`}>
     <Header />
     {children}
     <Footer />
