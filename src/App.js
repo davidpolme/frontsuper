@@ -1,15 +1,14 @@
-import React, {useState,useEffect} from 'react'
-import SignInSignUp from './page/SignInSignUp';
-import {ToastContainer}from 'react-toastify'
-import {AuthContext}from './utils/contexts'
-import {isUserLoggedInApi} from './api/auth';
-import Routing from './routes/Routing'
+import React, { useState, useEffect } from "react";
+import SignInSignUp from "./page/SignInSignUp";
+import { ToastContainer } from "react-toastify";
+import { AuthContext } from "./utils/contexts";
+import { isUserLoggedInApi } from "./api/auth";
+import Routing from "./routes/Routing";
 
 export default function App() {
-
-  const [user, setUser] = useState(null );
-  const [loadUser, setLoadUser] = useState(false)
-  const [refreshcheckLogin, setRefreshcheckLogin] = useState(false)
+  const [user, setUser] = useState(null);
+  const [loadUser, setLoadUser] = useState(false);
+  const [refreshcheckLogin, setRefreshcheckLogin] = useState(false);
 
   useEffect(() => {
     setUser(isUserLoggedInApi());
@@ -17,16 +16,16 @@ export default function App() {
     setLoadUser(true);
   }, [refreshcheckLogin]);
 
-  if(!loadUser) {
+  if (!loadUser) {
     return null;
   }
-  
+
   return (
     <AuthContext.Provider value={user}>
       {user ? (
-        <Routing />
+        <Routing setRefreshcheckLogin={setRefreshcheckLogin} />
       ) : (
-        <SignInSignUp setRefreshcheckLogin ={setRefreshcheckLogin}/>
+        <SignInSignUp setRefreshcheckLogin={setRefreshcheckLogin} />
       )}
       <ToastContainer
         position="top-right"
@@ -41,5 +40,4 @@ export default function App() {
       />
     </AuthContext.Provider>
   );
-
 }

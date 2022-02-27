@@ -4,15 +4,18 @@ import Home from "../page/Home";
 import Error from "../page/Error";
 import Layout from "../layout";
 
-const Routing = () => (
-  <BrowserRouter>
-    <Layout>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-    </Layout>
-  </BrowserRouter>
-);
+const Routing = (props) => {
+  const { setRefreshcheckLogin } = props;
+  return (
+    <BrowserRouter>
+      <Layout setRefreshcheckLogin={setRefreshcheckLogin}>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
+  );
+};
 
 export default Routing;
