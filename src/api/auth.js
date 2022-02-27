@@ -1,4 +1,5 @@
 import {API_HOST, TOKEN} from '../utils/constants';
+import jwtDecode from 'jwt-decode';
 
 export function signUpApi(user) {
     const url = `${API_HOST}/api/registrarAdmin`;
@@ -62,4 +63,38 @@ export function signInApi(user){
 
 export function setTokenApi(token) {
   localStorage.setItem(TOKEN, token);
+}
+
+export function getTokenApi(){
+  return localStorage.getItem(TOKEN);
+}
+
+export function logOutApi() {
+  localStorage.removeItem(TOKEN);
+}
+
+export function isUserLoggedInApi(){
+  const token = getTokenApi()
+
+  if(!token){
+    logOutApi();
+    return null; 
+  }
+  if(isExpired(token)){
+    logOutApi();
+  }
+  return jwtDecode(token)
+}
+
+export function isExpired(token){
+ const {exp} = jwtDecode(token)
+ const expire = exp*1000;
+ const timeout = expire -Date.now();
+
+ if(timeout < 0){
+   return true
+ }else{
+   return false
+ }
+
 }

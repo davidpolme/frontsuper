@@ -14,7 +14,8 @@ import SignInForm from "../../components/SignInForm/SignInForm";
 
 import "./SignInSignUp.scss";
 
-export default function SignInSignUp() {
+export default function SignInSignUp(props) {
+  const {setRefreshcheckLogin}= props;
   const [showModal, setShowModal] = useState(false);
   const [contentModal, setContentModal] = useState(null);
   
@@ -34,9 +35,10 @@ export default function SignInSignUp() {
         </Row>
         <Row>
           <LeftComponent />
-          <RightComponent 
+          <RightComponent
             openModal={openModal}
             setShowModal={setShowModal}
+            setRefreshcheckLogin={setRefreshcheckLogin}
           />
         </Row>
       </Container>
@@ -69,22 +71,25 @@ function LeftComponent() {
   );
 }
 function RightComponent(props) {
-  const {openModal, setShowModal}= props;
+  const { openModal, setShowModal, setRefreshcheckLogin } = props;
   return (
     <Col className="signin-signup__right" xs={6}>
       <div className="">
         <img src={LogoWhite} alt="supervoices" />
         <h2>Lleva tu carrera como locutor al siguiente nivel</h2>
         <h3>Únete a Supervoices hoy mismo</h3>
-        <Button
-          variant="primary"
-          onClick={() => openModal(<SignUpForm setShowModal={setShowModal} />)}
-        >
+        <Button variant="primary" onClick={() => openModal(<SignUpForm />)}>
           Regístrate
         </Button>
         <Button
           variant="outline-primary"
-          onClick={() => openModal(<SignInForm setShowModal={setShowModal} />)}
+          onClick={() =>
+            openModal(
+              <SignInForm
+                setRefreshcheckLogin={setRefreshcheckLogin}
+              />
+            )
+          }
         >
           Iniciar sesión
         </Button>
