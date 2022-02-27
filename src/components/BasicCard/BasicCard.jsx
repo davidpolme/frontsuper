@@ -3,7 +3,7 @@ import { Card, Button } from "react-bootstrap";
 import './Card.scss';
 
 export default function BasicCard(props) {
-  const { imgSrc, cardTitle, cardText, index } = props; 
+  const { imgSrc, cardTitle, cardText } = props; 
   return (
     <Card style={{ width: "18rem" }} key="{key}">
       <Card.Img variant="top" src={imgSrc} />
