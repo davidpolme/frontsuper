@@ -1,38 +1,44 @@
-@import '../../scss/index.scss';
-
-.paginationBtns{
+@import "../../scss/index.scss";
+.pagination {
+  display: flex;
+  flex-direction: column;
+  .container {
+    min-height: 70vh;
+    min-width: 60vw;
+  }
+  .paginationBtns {
     margin: 1em;
     width: 80%;
     height: 2em;
     list-style: none;
     display: flex;
     justify-content: center;
-    a{
-        padding:0.5em;
-        margin: 0.5em;
-        border-radius: 0.2em;
-        border: 1px solid $primary;
-        color: $font-primary;
-        cursor: pointer;
-        &:hover {
-            color:$font-light;
-            background-color:$primary-light
-        }
+    a {
+      padding: 0.5em;
+      margin: 0.5em;
+      border-radius: 0.2em;
+      border: 1px solid $primary;
+      color: $font-primary;
+      cursor: pointer;
+      &:hover {
+        color: $font-light;
+        background-color: $primary-light;
+      }
     }
-}
-/* .previousBtn{
-
-}
-.nextBtn{
-
-}
-.paginationDisabled{
-
-} */
-.paginationActive{
-    a{
-          color:$font-light;
-            background-color:$primary-light
+  }
+  /* .previousBtn{
+    
     }
-
+    .nextBtn{
+    
+    }
+    .paginationDisabled{
+    
+    } */
+  .paginationActive {
+    a {
+      color: $font-light;
+      background-color: $primary-light;
+    }
+  }
 }
