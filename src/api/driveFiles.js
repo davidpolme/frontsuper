@@ -25,7 +25,6 @@ export function uploadImg(e ) {
         method: "POST",
         body: JSON.stringify(dataSend),
       };
-  
       //Esta es la promesa
       fetch(url, params) //send to Api
         .then((response) => {
@@ -33,24 +32,10 @@ export function uploadImg(e ) {
         })
         .then((result) => {
           resolve( result)
-          cargarURLResultado(result);
-          console.log({ "Dentro de la promesa": result });
         })
         .catch((err) => {
-          console.log(err);
-        }) // Or Error in console
-      //-----------------------------------------------
+          reject(err);
+        })
     };
-
-
   })
-
-
-
-  //---------------------------------------
-  
-}
-
-function cargarURLResultado(resultado) {
-  console.log({ "urlResultado_En la nueva Funcion": resultado });
 }

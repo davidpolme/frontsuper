@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./Home.scss";
 import Cards from "../../components/Cards";
 import Pagination from "../../components/Pagination";
+import BasicModal from "../../components/Modal/BasicModal";
+import CreateConcurso from "../../components/CreateConcursoForm";
+import { Button, Row, Col } from "react-bootstrap";
+
 
 import { getConcursosApi } from "../../api/concursos";
 import { toast } from "react-toastify";
@@ -9,11 +13,17 @@ import { toast } from "react-toastify";
 export default function Home() {
   const [newCard, setNewCard] = useState(null);
   const [existData, setExistData] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [contentModal, setContentModal] = useState(null);
 
+  const openModal = (content) => {
+    setShowModal(true);
+    setContentModal(content);
+  };
   useEffect(() => {
     getConcursosApi()
       .then((response) => {
-        // setNewCard(response)
+        console.log({"Response Concursos":response.concursos});
         setNewCard(response.concursos);
         setExistData(true);
         if (response.concursos.length <= 0) {
@@ -28,25 +38,27 @@ export default function Home() {
       });
   }, []);
 
-  /* const cards = [
-   {
-     id: "1",
-     imgSrc:
-       "https://images.unsplash.com/photo-1578070181910-f1e514afdd08?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1833&q=80",
-     Title: "El Titulin",
-     Text: "El Textin, bien perrin",
-   },
- ]; */
-
   return (
-    <div className="home">
-      <h1>Concursos</h1>
-      {existData ? (
-        <Pagination items={newCard} />
-      ) : (
-        <h2>Aún no hay concursos</h2>
-      )}
-    </div>
+    <>
+      <div className="home">
+        <h1>Concursos</h1>
+        <Button
+          variant="primary"
+          onClick={() =>
+            openModal(<CreateConcurso setShowModal={setShowModal} />)
+          }
+        >
+          Crear nuevo Concurso
+        </Button>
+        {existData ? (
+          <Pagination items={newCard} />
+        ) : (
+          <h2>Aún no hay concursos</h2>
+        )}
+      </div>
+      <BasicModal show={showModal} setShowModal={setShowModal}>
+        {contentModal}
+      </BasicModal>
+    </>
   );
 }
-/* imgSrc, Title, Text */

@@ -5,6 +5,7 @@ import { Row, Col, Button, Form, Spinner } from "react-bootstrap";
 import { API_HOST } from "../../utils/constants";
 import DatePicker from "react-datepicker";
 import { uploadImg } from "../../api/driveFiles";
+import { createConcursoApi } from "../../api/concursos";
 import "./CreateConcurso.scss";
 
 export default function CreateConcurso(props) {
@@ -18,13 +19,50 @@ export default function CreateConcurso(props) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-   function onSubmit(e) {
-     e.preventDefault();
-     uploadImg(e).then(response => {
-      console.log({"Este es el que necesito":response});
-     })
-      
-   };
+  function onSubmit(e) {
+    e.preventDefault();
+
+    setCreateConcLoading(true);
+
+    uploadImg(e)
+      .then((response) => {
+        return response.url;
+      })
+      .then((imageUrl) => {
+        let nuevoConcurso = {
+          nombreConcurso: formData.nombreConcurso,
+          urlConcurso: document.getElementById("myText").innerHTML,
+          fechaInicio: startDate,
+          fechaFinal: endDate,
+          precio: formData.precio,
+          guion: formData.guion,
+          recomendaciones: formData.recomendaciones,
+          urlBanner: imageUrl,
+          creadoPor: "Admin",
+        };
+        createConcursoApi(nuevoConcurso)
+          .then((res) => {
+            toast.success("Concurso creado");
+            setCreateConcLoading(false);
+            setShowModal(false)
+
+
+            //TODO: Esto hay que quitarlo y refrescar el componente usando estados
+            window.location.reload(false);
+          })
+          .catch((error) => {
+            toast.error("Hubo un error al crear el concurso");
+            //TODO:Eliminar imagen
+            console.log({ "Error Cargar Concurso": error });
+            setCreateConcLoading(false);
+          });
+      })
+      .catch(function (error) {
+        toast.error("Hubo un error al cargar la imagen");
+        console.log({ "Error Cargar Imagen": error });
+        setCreateConcLoading(false);
+      });
+  }
 
   return (
     <div className="crear-concurso-form">
@@ -98,7 +136,7 @@ export default function CreateConcurso(props) {
               <DatePicker
                 id="endDate"
                 selected={endDate}
-                onChange={(date) => setStartDate(date)}
+                onChange={(date) => setEndDate(date)}
                 dateFormat="yyyy-MM-dd"
               />
             </Col>
