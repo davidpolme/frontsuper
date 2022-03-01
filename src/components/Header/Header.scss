@@ -1,8 +1,27 @@
 @import "../../scss/index.scss";
 
 .header {
- .me-auto{
-     display : flex;
-     justify-content: flex-end !important;
- }
+  display: flex;
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+  }
+  .navLink {
+    color: $font-light;
+    padding: 1em;
+    margin-right: 5px;
+    text-decoration: none;
+    border-radius: 5px;
+    &:hover {
+      background-color: $primary-light;
+      &#logoutbtn{
+         background-color: $danger-ligth;
+      }
+    }
+    
+  }
+  .me-auto {
+    display: flex;
+    justify-content: flex-end !important;
+  }
 }

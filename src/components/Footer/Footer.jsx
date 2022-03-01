@@ -2,6 +2,10 @@ import React from "react";
 import { Container, Navbar, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 const Footer = () => (
+
+
+  <footer >
+
   <Navbar bg="light" variant="light">
     <Container>
       <Navbar.Collapse className="justify-content-start">
@@ -35,6 +39,7 @@ const Footer = () => (
       </Navbar.Collapse>
     </Container>
   </Navbar>
+  </footer>
 );
 
 export default Footer;

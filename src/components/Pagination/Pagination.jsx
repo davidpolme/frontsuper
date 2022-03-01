@@ -10,10 +10,8 @@ export default function Pagination({ items, children }) {
   const itemsPerPage = ITEMS_PER_PAGE;
   const pagesVisited = pageNumber * itemsPerPage;
   const displayItems = items.slice(pagesVisited, pagesVisited + itemsPerPage);
-  console.log({ InPaginationItems: items });
 
   const pageCount = Math.ceil(items.length / itemsPerPage);
-  console.log({"pageCount": items});
 
   const changePage = ({selected}) => {
       setPageNumber(selected)

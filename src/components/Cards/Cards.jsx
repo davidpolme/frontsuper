@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Row } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import BasicCard from "../../components/BasicCard";
 import "./Cards.scss";
 import { Link } from "react-router-dom";
@@ -25,19 +25,20 @@ export default function Cards({ cards }) {
       >
         Crear nuevo Concurso
       </Button>
-      <Row>
-        {cards.map((card) => {
-          return (
-            <BasicCard
-              className="card"
-              imgSrc={card.imgSrc}
-              cardTitle={card.Title}
-              cardText={card.Text}
-              key={card.id.toString()}
-            />
-          );
-        })}
-      </Row>
+
+        <Row className="cards">
+          {cards.map((card) => {
+            return (
+              <BasicCard
+                className="card"
+                imgSrc={card.imgSrc}
+                cardTitle={card.Title}
+                cardText={card.Text}
+                key={card.id.toString()}
+              />
+            );
+          })}
+        </Row>
       <BasicModal show={showModal} setShowModal={setShowModal}>
         {contentModal}
       </BasicModal>

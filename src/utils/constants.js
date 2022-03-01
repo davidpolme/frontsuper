@@ -3,3 +3,6 @@ export const API_HOST = "http://127.0.0.1:5000";
 export const TOKEN = "token";
 
 export const ITEMS_PER_PAGE = 11;
+
+export const URL_STORE_IMAGES =
+  "https://script.google.com/macros/s/AKfycbzERG5gAmz0j7L3WqwQH67u8UvgLn2MS3GdU-_O26VJP6YxNOza/exec";

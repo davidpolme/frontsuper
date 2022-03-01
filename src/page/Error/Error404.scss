@@ -1,5 +1,11 @@
 @import '../../scss/index.scss';
 
 .error404{
-
+    color: $font-light;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary;
+    height: 50vh;
 }

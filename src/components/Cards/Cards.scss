@@ -1,5 +1,7 @@
- @import '../../scss/index.scss';
+@import "../../scss/index.scss";
 
- .card{
-     margin: 0.5em;
- }
+.cards {
+  display: flex;
+  justify-content:space-between;
+  margin: 0;
+}

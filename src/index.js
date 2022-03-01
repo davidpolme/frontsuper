@@ -4,6 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.scss';
 import "react-toastify/dist/ReactToastify.css"; 
+import "react-datepicker/dist/react-datepicker.css";
 
 
 ReactDOM.render(
