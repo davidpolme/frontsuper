@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import Logo from "../../assets/png/voice-recorder.png";
-import LogoWhite from "../../assets/png/mic.png";
+import Logo from "../../../assets/png/voice-recorder.png";
+import LogoWhite from "../../../assets/png/mic.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMusic,
   faMicrophone,
   faCalendarDay,
 } from "@fortawesome/free-solid-svg-icons";
-import BasicModal from "../../components/Modal/BasicModal";
-import SignUpForm from "../../components/SignUpForm/SignUpForm";
-import SignInForm from "../../components/SignInForm/SignInForm";
+import BasicModal from "../../../components/Modal/BasicModal";
+import SignUpForm from "../../../components/SignUpForm/SignUpForm";
+import SignInForm from "../../../components/SignInForm/SignInForm";
 
 import "./SignInSignUp.scss";
 

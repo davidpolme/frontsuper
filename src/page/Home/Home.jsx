@@ -15,6 +15,13 @@ export default function Home() {
   const [existData, setExistData] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [contentModal, setContentModal] = useState(null);
+  const [home, setHome] = useState(false);
+  const [refreshcheckHome, setRefreshcheckHome] = useState(false);
+  
+    useEffect(() => {
+      setHome(true);
+      setRefreshcheckHome(false);
+    }, [refreshcheckHome]);
 
   const openModal = (content) => {
     setShowModal(true);

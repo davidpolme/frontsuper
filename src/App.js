@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import SignInSignUp from "./page/SignInSignUp";
 import { ToastContainer } from "react-toastify";
 import { AuthContext } from "./utils/contexts";
 import { isUserLoggedInApi } from "./api/auth";
@@ -14,7 +13,6 @@ export default function App() {
     setUser(isUserLoggedInApi());
     setRefreshcheckLogin(false);
     setLoadUser(true);
-    
   }, [refreshcheckLogin]);
   
   
@@ -33,7 +31,6 @@ export default function App() {
           user={user}
         />
       ) : (
-        // <SignInSignUp setRefreshcheckLogin={setRefreshcheckLogin} />
         <PublicRouting
           user={user}
           setRefreshcheckLogin={setRefreshcheckLogin}

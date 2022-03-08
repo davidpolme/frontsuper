@@ -11,6 +11,7 @@ const Routing = (props) => {
       <Layout setRefreshcheckLogin={setRefreshcheckLogin} user={user}>
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route exact path="/login" element={<Home />} />
           <Route exact path="/home" element={<Home />} />
           <Route path="/concurso/:urlConc" element={<Concurso />} />
           <Route path="*" element={<Error />} />

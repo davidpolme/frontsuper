@@ -6,12 +6,14 @@ const Header = () => {
   return (
     <header className="header">
       <Container fluid className="p-0">
-        <Navbar className="p-3" bg="dark" variant="dark">
+        <Navbar className="p-3" variant="dark">
           <Navbar.Brand href="/">
             <h2>Super Voices</h2>
           </Navbar.Brand>
-          <Nav >
-            <Link className="navLink" to="/">Home</Link>
+          <Nav>
+            <Link className="navLink" to="/login">
+              Iniciar Sesion
+            </Link>
           </Nav>
         </Navbar>
       </Container>

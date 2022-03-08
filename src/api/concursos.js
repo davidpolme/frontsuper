@@ -14,6 +14,8 @@ export function getConcursosApi() {
     },
   };
 
+
+
   return fetch(url, params)
     .then((response) => {
       if (response.status >= 200 && response.status < 300) {
@@ -33,6 +35,37 @@ export function getConcursosApi() {
       return err;
     });
 }
+
+  export function getPublicConcursosApi() {
+    const url = `${API_HOST}/api/registrarConcursos`;
+    const params = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      },
+    };
+
+    return fetch(url, params)
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          return response.json();
+        }
+        return {
+          code: 404,
+          message: "Error en el servidor al cargar los concursos",
+        };
+      })
+      .then((result) => {
+        console.log({ inPromise: result });
+
+        return result;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
 
 export function createConcursoApi(concurso) {
   
