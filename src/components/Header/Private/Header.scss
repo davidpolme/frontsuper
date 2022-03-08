@@ -1,7 +1,8 @@
-@import "../../scss/index.scss";
+@import "../../../scss/index.scss";
 
 .header {
   display: flex;
+  margin-left:0;
   .navbar {
     display: flex;
     justify-content: space-between;

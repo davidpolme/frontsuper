@@ -2,7 +2,7 @@ import React from "react";
 import "./Header.scss";
 import { Link } from "react-router-dom";
 import { Container, Navbar, Nav } from "react-bootstrap";
-import { logOutApi } from "../../api/auth";
+import { logOutApi } from "../../../api/auth";
 const Header = (props) => {
   const { setRefreshcheckLogin } = props;
 
@@ -11,7 +11,7 @@ const Header = (props) => {
     setRefreshcheckLogin(true);
   };
   return (
-    <header className="header">.
+    <header className="header">
       <Container fluid className="p-0">
         <Navbar className="p-3" bg="primary" variant="dark">
           <Navbar.Brand href="/">

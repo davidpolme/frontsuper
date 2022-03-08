@@ -5,7 +5,7 @@ import Cards from "../Cards";
 import {ITEMS_PER_PAGE} from "../../utils/constants"
 import { Container } from "react-bootstrap";
 
-export default function Pagination({ items, children }) {
+export default function Pagination({ items }) {
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = ITEMS_PER_PAGE;
   const pagesVisited = pageNumber * itemsPerPage;

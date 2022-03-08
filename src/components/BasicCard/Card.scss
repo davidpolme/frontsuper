@@ -4,3 +4,16 @@
     margin: 2em 0.2em;
     color: $primary-dark;
 }
+
+.card-body {
+    a{
+        background-color: $primary;
+        padding: 0.5em;
+        border-radius: 0.3em;
+        color: $font-light;
+        text-decoration: none;
+        &:hover{
+            background-color: $primary-transparent;
+        }
+    }
+}

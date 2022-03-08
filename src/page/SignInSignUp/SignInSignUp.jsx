@@ -30,11 +30,6 @@ export default function SignInSignUp(props) {
     <>
       <Container className="signin-signup" fluid>
         <Row>
-          <h1 className="title" xs={6}>
-            SuperVoices
-          </h1>
-        </Row>
-        <Row>
           <LeftComponent />
           <RightComponent
             openModal={openModal}
