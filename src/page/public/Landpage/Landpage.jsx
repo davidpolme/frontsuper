@@ -15,7 +15,6 @@ export default function Landpage() {
     useEffect(() => {
       getPublicConcursosApi()
         .then((response) => {
-          console.log({ "Response Concursos": response.concursos });
           setNewCard(response.concursos);
           setExistData(true);
           if (response.concursos.length <= 0) {

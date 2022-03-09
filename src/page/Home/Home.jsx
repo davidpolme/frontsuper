@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./Home.scss";
-import Cards from "../../components/Cards";
+// import Cards from "../../components/Cards";
 import Pagination from "../../components/Pagination";
 import BasicModal from "../../components/Modal/BasicModal";
 import CreateConcurso from "../../components/CreateConcursoForm";
-import { Button, Row, Col } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 
 import { getConcursosApi } from "../../api/concursos";
@@ -15,13 +15,14 @@ export default function Home() {
   const [existData, setExistData] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [contentModal, setContentModal] = useState(null);
-  const [home, setHome] = useState(false);
-  const [refreshcheckHome, setRefreshcheckHome] = useState(false);
   
+ /*  const [refreshcheckHome, setRefreshcheckHome] = useState(false);
+  const [home, setHome] = useState(false);
     useEffect(() => {
       setHome(true);
       setRefreshcheckHome(false);
     }, [refreshcheckHome]);
+ */
 
   const openModal = (content) => {
     setShowModal(true);
@@ -30,7 +31,6 @@ export default function Home() {
   useEffect(() => {
     getConcursosApi()
       .then((response) => {
-        console.log({"Response Concursos":response.concursos});
         setNewCard(response.concursos);
         setExistData(true);
         if (response.concursos.length <= 0) {
@@ -57,6 +57,7 @@ export default function Home() {
         >
           Crear nuevo Concurso
         </Button>
+        
         {existData ? (
           <Pagination items={newCard} />
         ) : (

@@ -14,6 +14,9 @@ const Header = () => {
             <Link className="navLink" to="/login">
               Iniciar Sesion
             </Link>
+            <Link className="navLink" to="/">
+              Concursos Activos
+            </Link>
           </Nav>
         </Navbar>
       </Container>

@@ -27,7 +27,6 @@ export function getConcursosApi() {
       };
     })
     .then((result) => {
-      console.log({ inPromise: result });
 
       return result;
     })
@@ -58,8 +57,6 @@ export function getConcursosApi() {
         };
       })
       .then((result) => {
-        console.log({ inPromise: result });
-
         return result;
       })
       .catch((err) => {

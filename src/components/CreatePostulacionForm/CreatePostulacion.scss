@@ -1,0 +1,36 @@
+.crear-postulación-form{
+
+    
+    .col-span {
+        display: flex;
+        align-items: center;
+    }
+    
+    .price {
+        .form-label {
+            margin: 0;
+        }
+        span {
+            margin: 1em;
+        }
+    }
+    
+    .inlineItems {
+        display: flex;
+        align-items: center;
+  justify-content: center;
+}
+
+.form-group {
+    padding-bottom: 20px;
+}
+button {
+    width: 100%;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 50px;
+    margin-top: 30px;
+}
+
+}
