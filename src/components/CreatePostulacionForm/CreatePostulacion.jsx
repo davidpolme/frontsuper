@@ -27,6 +27,8 @@ export default function CreateConcurso(props) {
     console.log({ "Name": filenameau.split(/(\\|\/)/g).pop() });
     console.log({"Type":e.target[3].files[0].type})
 
+
+    
   }
 
   return (

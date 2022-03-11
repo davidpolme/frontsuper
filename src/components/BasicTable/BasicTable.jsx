@@ -4,41 +4,58 @@ import { Link } from "react-router-dom";
 import { getPostulacionesByIdApi } from "../../api/postulaciones";
 
 export default function BasicTable() {
-    useEffect(() => {
-      getPostulacionesByIdApi().then((response) => {
-        console.log({ "Concursos particulares": response });
-      });
-    }, []);
+  const [dataisLoaded, setDataisLoaded] = useState(false);
+  const [dataPostulaciones, setDataPostulaciones] = useState(null);
+
+  useEffect(() => {
+    getPostulacionesByIdApi().then((response) => {
+      console.log({ "Concursos particulares": response });
+      setDataPostulaciones(response);
+      setDataisLoaded(true);
+    });
+  }, []);
 
   return (
-    <Table striped bordered hover variant="dark">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Nombre Completo</th>
-          <th>Email</th>
-          <th>Observaciones</th>
-          <th>nombreArchivo</th>
-          <th>Audio</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>4</td>
-          <td>5</td>
-          <td>
-            <audio controls>
-              <source src="/" />
-            </audio>
-          </td>
-          <td>Descargar audio</td>
-        </tr>
-      </tbody>
-      {/*  <tbody>
+    <>
+      {!dataisLoaded ? (
+        <h1>No se han cargado datos</h1>
+      ) : (
+        <Table striped bordered hover variant="dark">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre Completo</th>
+              <th>Email</th>
+              <th>Observaciones</th>
+              <th>nombreArchivo</th>
+              <th>Audio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {!dataPostulaciones ? (
+              <h1>Actualmente no hay postulaciones para este concurso</h1>
+            ) : (
+              dataPostulaciones.map((postulacion) => {
+                return (
+                  <tr key={postulacion.id}>
+                    <td>{postulacion.id}</td>
+                    <td>{postulacion.nombre + ' ' + postulacion.apellido}</td>
+                    <td>{postulacion.email}</td>
+                    <td>{postulacion.observaciones}</td>
+                    <td>{postulacion.nombreArchivo}</td>
+                    <td>
+                      <audio controls>
+                        <source src="/" />
+                      </audio>
+                    </td>
+                    <td>Descargar audio</td>
+                  </tr>
+                );
+              })
+            )}
+          </tbody>
+          {/*  <tbody>
           {data_postulaciones.map((postulacion) => {
             console.log("postulacion" + postulacion);
             if (postulacion) {
@@ -50,78 +67,17 @@ export default function BasicTable() {
                   <td>{postulacion.observaciones}</td>
                   <td>{postulacion.nombreArchivo}</td>
                   <td>
-                    <audio controls>
+                  <audio controls>
                       <source src={postulacion.pathArchivo} />
                     </audio>
                   </td>
                 </tr>
-              );
+                );
             }
           })}
         </tbody> */}
-    </Table>
+        </Table>
+      )}
+    </>
   );
 }
-
-/* 
-
-class BasicTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data_postulaciones: [],
-      DataisLoaded: false,
-      id_concurso: 0,
-      url_concurso: "",
-    };
-}
-render() {
-
-    const { data_postulaciones, DataisLoaded } = this.state;
-    if (!DataisLoaded)
-      return (
-        <div>
-          <h1> Los datos se están cargando... </h1>
-        </div>
-      );
-    return (
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nombre Completo</th>
-            <th>Email</th>
-            <th>Observaciones</th>
-            <th>nombreArchivo</th>
-            <th>Audio</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {data_postulaciones.map((postulacion) => {
-            console.log("postulacion" + postulacion);
-            if (postulacion) {
-              return (
-                <tr key={postulacion.id}>
-                  <td>{postulacion.id}</td>
-                  <td>{postulacion.nombre + " " + postulacion.apellido}</td>
-                  <td>{postulacion.email}</td>
-                  <td>{postulacion.observaciones}</td>
-                  <td>{postulacion.nombreArchivo}</td>
-                  <td>
-                    <audio controls>
-                      <source src={postulacion.pathArchivo} />
-                    </audio>
-                  </td>
-                </tr>
-              );
-            }
-          })}
-        </tbody>
-      </Table>
-    );
-  }
-}
-
-export default BasicTable;
- */
