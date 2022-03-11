@@ -1,4 +1,4 @@
-import {API_HOST, TOKEN} from '../utils/constants';
+import { API_HOST, TOKEN, USERID } from "../utils/constants";
 import jwtDecode from 'jwt-decode';
 
 export function signUpApi(user) {
@@ -55,7 +55,8 @@ export function signInApi(user){
     }
     return {message: "usuario o contraseña incorrectos"}
   }).then(result => {
-    return result;
+    console.log(result);
+    return result ;
   }).catch(err => {
     return err
   })
@@ -64,6 +65,15 @@ export function signInApi(user){
 export function setTokenApi(token) {
   localStorage.setItem(TOKEN, token);
 }
+
+export function setUserIDApi(userID) {
+  localStorage.setItem(USERID, userID);
+}
+
+export function getUserIDApi() {
+  return localStorage.getItem(USERID);
+}
+
 
 export function getTokenApi(){
   return localStorage.getItem(TOKEN);

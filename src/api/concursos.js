@@ -35,6 +35,40 @@ export function getConcursosApi() {
     });
 }
 
+export function getConcursoByIDApi(idUsuario) {
+  const url = `${API_HOST}/api/admin`;
+  const token = getTokenApi();
+  const params = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      "usuario_id": idUsuario,
+    })
+  };
+
+  return fetch(url, params)
+    .then((response) => {
+      if (response.status >= 200 && response.status < 300) {
+        return response.json();
+      }
+      return {
+        code: 404,
+        message: "Error en el servidor al cargar los concursos",
+      };
+    })
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      return err;
+    });
+}
+
   export function getPublicConcursosApi() {
     const url = `${API_HOST}/api/registrarConcursos`;
     const params = {

@@ -6,6 +6,7 @@ import { API_HOST } from "../../utils/constants";
 import DatePicker from "react-datepicker";
 import { uploadImg } from "../../api/driveFiles";
 import { createConcursoApi } from "../../api/concursos";
+import {getUserIDApi} from "../../api/auth";
 import "./CreateConcurso.scss";
 
 export default function CreateConcurso(props) {
@@ -31,15 +32,17 @@ export default function CreateConcurso(props) {
       .then((imageUrl) => {
         let nuevoConcurso = {
           nombreConcurso: formData.nombreConcurso,
-          urlConcurso: document.getElementById("myText").innerHTML,
+          url: document.getElementById("myText").innerHTML,
           fechaInicio: startDate,
           fechaFinal: endDate,
           precio: formData.precio,
           guion: formData.guion,
           recomendaciones: formData.recomendaciones,
           urlBanner: imageUrl,
-          creadoPor: "Admin",
+          admin_id: getUserIDApi(),
         };
+
+        console.log(nuevoConcurso);
         createConcursoApi(nuevoConcurso)
           .then((res) => {
             toast.success("Concurso creado");
@@ -111,7 +114,7 @@ export default function CreateConcurso(props) {
                 id="initialDate"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
-                dateFormat="yyyy-MM-dd"
+                dateFormat="yyyy-mm-dd'T'HH:MM:ss"
               />
             </Col>
 
@@ -137,7 +140,7 @@ export default function CreateConcurso(props) {
                 id="endDate"
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
-                dateFormat="yyyy-MM-dd"
+                dateFormat="yyyy-mm-dd'T'HH:MM:ss"
               />
             </Col>
             <Col className="inlineItems">
@@ -186,7 +189,7 @@ export default function CreateConcurso(props) {
 function initialFormValue() {
   return {
     nombreConcurso: "",
-    urlConcurso: "",
+    url: "",
     fechaInicio: "",
     fechaFinal: "",
     precio: "30000",

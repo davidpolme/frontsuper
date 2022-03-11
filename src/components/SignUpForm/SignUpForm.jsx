@@ -29,7 +29,7 @@ export default function SignUpForm(props) {
       toast.warning("Email Invalido");
     } else if (formData.password !== formData.repeatPassword) {
       toast.warning("Las constraseñas deben ser iguales");
-    } else if (size(formData.password) < 6) {
+    } else if (size(formData.clave) < 6) {
       toast.warning("La constraseña debe tener al menos 6 caracteres");
     } else {
       setSignUpLoading(true);
@@ -92,8 +92,8 @@ export default function SignUpForm(props) {
               <Form.Control
                 type="password"
                 placeholder="Contraeña"
-                defaultValue={formData.password}
-                name="password"
+                defaultValue={formData.clave}
+                name="clave"
               />
             </Col>
             <Col>
@@ -119,7 +119,7 @@ function initialFormValue() {
     nombre: "",
     apellido: "",
     email: "",
-    password: "",
+    clave: "",
     repeatPassword: "",
   };
 }

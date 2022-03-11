@@ -6,32 +6,24 @@ import BasicModal from "../../components/Modal/BasicModal";
 import CreateConcurso from "../../components/CreateConcursoForm";
 import { Button } from "react-bootstrap";
 
-
-import { getConcursosApi } from "../../api/concursos";
+import {getUserIDApi} from "../../api/auth";
+import { getConcursoByIDApi } from "../../api/concursos";
 import { toast } from "react-toastify";
 
 export default function Home() {
-  const [newCard, setNewCard] = useState(null);
+  const [responseItems, setResponseItems] = useState(null);
   const [existData, setExistData] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [contentModal, setContentModal] = useState(null);
-  
- /*  const [refreshcheckHome, setRefreshcheckHome] = useState(false);
-  const [home, setHome] = useState(false);
-    useEffect(() => {
-      setHome(true);
-      setRefreshcheckHome(false);
-    }, [refreshcheckHome]);
- */
 
   const openModal = (content) => {
     setShowModal(true);
     setContentModal(content);
   };
   useEffect(() => {
-    getConcursosApi()
+    getConcursoByIDApi(getUserIDApi())
       .then((response) => {
-        setNewCard(response.concursos);
+        setResponseItems(response.concursos);
         setExistData(true);
         if (response.concursos.length <= 0) {
           toast.info("Aun no hay ningun Concurso");
@@ -57,11 +49,11 @@ export default function Home() {
         >
           Crear nuevo Concurso
         </Button>
-        
+
         {existData ? (
-          <Pagination items={newCard} />
+          <Pagination items={responseItems} />
         ) : (
-          <h2>Aún no hay concursos</h2>
+          <h2>Crea tu primer concurso</h2>
         )}
       </div>
       <BasicModal show={showModal} setShowModal={setShowModal}>

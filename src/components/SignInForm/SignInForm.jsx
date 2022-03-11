@@ -3,7 +3,12 @@ import {  Button, Form, Spinner } from "react-bootstrap";
 import { values, size } from "lodash";
 import { toast } from "react-toastify";
 import { isEmailValid } from "../../utils/validations";
-import { signInApi, setTokenApi } from "../../api/auth";
+import {
+  signInApi,
+  setTokenApi,
+  setUserIDApi,
+
+} from "../../api/auth";
 
 
 import "./SignInForm.scss";
@@ -35,10 +40,14 @@ export default function SignInForm(props) {
         }else{
             setSignInLoading(true)
             signInApi(formData).then(response =>{
-                if(response.message){
-                    toast.warning(response.message)
-                }else{
+              if(response.message){
+                toast.warning(response.message)
+              }else{
+                
+                console.log(response.access_token);
+
                     setTokenApi(response.access_token);
+                    setUserIDApi(response.usuario_id);
                     setRefreshcheckLogin(true);
                 }
             }).catch(error =>{
@@ -62,8 +71,8 @@ export default function SignInForm(props) {
           <Form.Control
             type="password"
             placeholder="Contraseña"
-            defaultValue={formData.password}
-            name="password"
+            defaultValue={formData.clave}
+            name="clave"
           />
           <Button value="primary" type="submit">
             {!signInLoading ? "Iniciar sesión":<Spinner animation="border"/>}
@@ -78,6 +87,6 @@ export default function SignInForm(props) {
 function initialFormValue(){
     return {
         email:'',
-        password:''
+        clave:''
     }
 }
