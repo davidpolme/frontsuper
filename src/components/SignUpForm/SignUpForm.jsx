@@ -27,7 +27,8 @@ export default function SignUpForm(props) {
       toast.warning("Completa todos los campos del formulario");
     } else if (!isEmailValid(formData.email)) {
       toast.warning("Email Invalido");
-    } else if (formData.password !== formData.repeatPassword) {
+    } else if (formData.clave !== formData.repeatPassword) {
+      console.table({ password: formData.password ,"repeat":formData.repeatPassword});
       toast.warning("Las constraseñas deben ser iguales");
     } else if (size(formData.clave) < 6) {
       toast.warning("La constraseña debe tener al menos 6 caracteres");

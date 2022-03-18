@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Row, Col, Button, Form, Spinner } from "react-bootstrap";
 // import { API_HOST } from "../../utils/constants";
 // import DatePicker from "react-datepicker";
-// import { uploadImg } from "../../api/driveFiles";
+import { uploadAudio } from "../../api/fileManagement";
 // import { createConcursoApi } from "../../api/concursos";
 import "./CreatePostulacion.scss";
 
@@ -26,7 +26,10 @@ export default function CreateConcurso(props) {
 
     console.log({ "Name": filenameau.split(/(\\|\/)/g).pop() });
     console.log({"Type":e.target[3].files[0].type})
-
+    uploadAudio(e)
+    .then((response) => {
+      console.log(response);
+    });
 
     
   }

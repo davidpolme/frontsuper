@@ -26,11 +26,11 @@ const Footer = () => (
           Grupo 12:
           <Col>
             <Row>
-              <Link to="/">David Polanía</Link>
+              <Link to="/">David Polanía Mejía</Link>
             </Row>
-            <Row>
+            {/* <Row>
               <Link to="/">Fernando Páez</Link>
-            </Row>
+            </Row> */}
             <Row>
               <Link to="/">Alejandro Medina</Link>
             </Row>

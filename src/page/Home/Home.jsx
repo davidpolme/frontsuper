@@ -7,7 +7,7 @@ import CreateConcurso from "../../components/CreateConcursoForm";
 import { Button } from "react-bootstrap";
 
 import {getUserIDApi} from "../../api/auth";
-import { getConcursoByIDApi } from "../../api/concursos";
+import { getConcursoByIDApi, getPublicConcursosApi } from "../../api/concursos";
 import { toast } from "react-toastify";
 
 export default function Home() {
@@ -21,10 +21,14 @@ export default function Home() {
     setContentModal(content);
   };
   useEffect(() => {
-    getConcursoByIDApi(getUserIDApi())
+    // getConcursoByIDApi(getUserIDApi())
+  getPublicConcursosApi()
       .then((response) => {
+
         setResponseItems(response.concursos);
         setExistData(true);
+        console.log({'Home Resources':response})
+
         if (response.concursos.length <= 0) {
           toast.info("Aun no hay ningun Concurso");
           setExistData(false);

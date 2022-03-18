@@ -23,8 +23,8 @@ export default function DetallesConcurso(props) {
       .then((response) => {
         setResponseItems(response);
         setExistData(true);
+        console.log({'Response':response});
         
-        console.log(response);
         if (response.length <= 0) {
           toast.info("Aun no hay ninguna Postulación");
           setExistData(false);

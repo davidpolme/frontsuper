@@ -9,9 +9,14 @@ export default function Pagination({ items }) {
   const [pageNumber, setPageNumber] = useState(0);
   const itemsPerPage = ITEMS_PER_PAGE;
   const pagesVisited = pageNumber * itemsPerPage;
-  const displayItems = items.slice(pagesVisited, pagesVisited + itemsPerPage);
-
-  const pageCount = Math.ceil(items.length / itemsPerPage);
+  var displayItems =[];
+  var pageCount=1;
+  
+  if(items){
+     displayItems = items.slice(pagesVisited, pagesVisited + itemsPerPage);
+    pageCount = Math.ceil(items.length / itemsPerPage);
+  }
+  
 
   const changePage = ({selected}) => {
       setPageNumber(selected)

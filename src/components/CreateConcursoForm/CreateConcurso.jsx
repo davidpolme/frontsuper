@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { Row, Col, Button, Form, Spinner } from "react-bootstrap";
 import { API_HOST } from "../../utils/constants";
 import DatePicker from "react-datepicker";
-import { uploadImg } from "../../api/driveFiles";
+import { uploadImage } from "../../api/fileManagement";
 import { createConcursoApi } from "../../api/concursos";
 import {getUserIDApi} from "../../api/auth";
 import "./CreateConcurso.scss";
@@ -25,11 +25,12 @@ export default function CreateConcurso(props) {
 
     setCreateConcLoading(true);
 
-    uploadImg(e)
-      .then((response) => {
-        return response.url;
+    uploadImage(e)
+    .then((response) => {
+      console.log(response)
+        return response;
       })
-      .then((imageUrl) => {
+      .then(() => {
         let nuevoConcurso = {
           nombreConcurso: formData.nombreConcurso,
           url: document.getElementById("myText").innerHTML,
@@ -38,7 +39,7 @@ export default function CreateConcurso(props) {
           precio: formData.precio,
           guion: formData.guion,
           recomendaciones: formData.recomendaciones,
-          urlBanner: imageUrl,
+          urlBanner: 'imageUrl',
           admin_id: getUserIDApi(),
         };
 
