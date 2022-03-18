@@ -2,9 +2,10 @@ import os
 from flask import Flask,redirect,url_for,render_template,request, Response
 import json
 from werkzeug.utils import secure_filename
+from flask_cors import CORS
 
 app=Flask(__name__)
-
+CORS(app)
 #UPLOAD_FOLDER = '/home/david/Documents/master/cloud_computing/supervoices/FileServer/Audios'
 UPLOAD_AUDIO_FOLDER = './../../FileServer/Audios/'
 UPLOAD_IMAGE_FOLDER = './../../FileServer/Images/'
