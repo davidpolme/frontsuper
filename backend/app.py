@@ -88,60 +88,61 @@ class RecursoListarConcursos(Resource):
     #@jwt_required()
     def get(self):
         #def get_concursos(current_user):
-            concursos=tblConcursos.query.all()
-            message = concs_schema.dump(concursos)
-            return jsonify({"concursos":message})
+        concursos=tblConcursos.query.all()
+        message = concs_schema.dump(concursos)
+        return jsonify({"concursos":message})
     #@jwt_required()
     def post(self):
         #def create_concurso(current_user):
         
-            nuevo_concurso=tblConcursos(
-                nombre=request.json['nombreConcurso'],
-                url=request.json['url'],
-                valor=request.json['precio'],
-                guion=request.json['guion'],
-                recomendaciones=request.json['recomendaciones'],
-                fechainicio=datetime.utcnow(),
-                fechafin=datetime.utcnow(),
-                creadopor=request.json['admin_id'],
-                fechacreacion=datetime.utcnow()
-            )
-            db.session.add(nuevo_concurso)
-            db.session.commit()
-            message = json.dumps({"message": "concurso creado"})
-            return Response(message, status=201, mimetype='application/json')
+        nuevo_concurso=tblConcursos(
+            nombre=request.json['nombreConcurso'],
+            url=request.json['url'],
+            valor=request.json['precio'],
+            guion=request.json['guion'],
+            recomendaciones=request.json['recomendaciones'],
+            fechainicio=datetime.utcnow(),
+            fechafin=datetime.utcnow(),
+            creadopor=request.json['admin_id'],
+            fechacreacion=datetime.utcnow()
+        )
+        
+        db.session.add(nuevo_concurso)
+        db.session.commit()
+        message = json.dumps({"message": "concurso creado"})
+        return Response(message, status=201, mimetype='application/json')
         
 class RecursoUnConcurso(Resource):
     #@jwt_required()
     def get(self,id_tblConcursos):
         #def get_concurso(current_user,id_tblConcursos):
-            concurso=tblConcursos.query.get_or_404(id_tblConcursos)
-            message = conc_schema.dump(concurso)
-            return jsonify(message)
+        concurso=tblConcursos.query.get_or_404(id_tblConcursos)
+        message = conc_schema.dump(concurso)
+        return jsonify(message)
     #@jwt_required()    
     def put(self, id_tblConcursos):
         #def update_concurso(current_user,id_tblConcursos):
-            concurso=tblConcursos.query.get_or_404(id_tblConcursos)
-            if 'nombre' in request.json:
-                concurso.nombre=request.json['nombre']
-            if 'url' in request.json:
-                concurso.url=request.json['frontEndUrl']+request.json['url']
-            if 'valor' in request.json:
-                concurso.valor=request.json['valor']
-            if 'guion' in request.json:
-                concurso.guion=request.json['guion']
-            if 'recomendaciones' in request.json:
-                concurso.recomendaciones=request.json['recomendaciones']
-            if 'fechainicio' in request.json:
-                concurso.fechainicio=request.json['fechainicio']
-            if 'fechafin' in request.json:
-                concurso.fechafin=request.json['fechafin']
-            if 'fechacreacion' in request.json:
-                concurso.fechacreacion=request.json['fechacreacion']
-            db.session.add(concurso)
-            db.session.commit()
-            message =  json.dumps({"message": "Concurso Actualizado Exitosamente"})
-            return Response(message, status=201, mimetype='application/json')
+        concurso=tblConcursos.query.get_or_404(id_tblConcursos)
+        if 'nombre' in request.json:
+            concurso.nombre=request.json['nombre']
+        if 'url' in request.json:
+            concurso.url=request.json['frontEndUrl']+request.json['url']
+        if 'valor' in request.json:
+            concurso.valor=request.json['valor']
+        if 'guion' in request.json:
+            concurso.guion=request.json['guion']
+        if 'recomendaciones' in request.json:
+            concurso.recomendaciones=request.json['recomendaciones']
+        if 'fechainicio' in request.json:
+            concurso.fechainicio=request.json['fechainicio']
+        if 'fechafin' in request.json:
+            concurso.fechafin=request.json['fechafin']
+        if 'fechacreacion' in request.json:
+            concurso.fechacreacion=request.json['fechacreacion']
+        db.session.add(concurso)
+        db.session.commit()
+        message =  json.dumps({"message": "Concurso Actualizado Exitosamente"})
+        return Response(message, status=201, mimetype='application/json')
 
     #@jwt_required()
     def delete(self,id_tblConcursos):
@@ -158,26 +159,26 @@ class RecursoAgregarAdmins(Resource):
         #def get_all_users(current_user):
          #   if not current_user.id:
           #      return jsonify({"error":"User not authenticated"}), 401
-            administradores=tblAdministradores.query.all()
-            return admins_schema.dump(administradores)
+        administradores=tblAdministradores.query.all()
+        return admins_schema.dump(administradores)
     def post(self):
         #def create_admin(current_user):
-            nombre=request.json['nombre']
-            apellido=request.json['apellido']
-            email=request.json['email']
-            clave=request.json['clave']
-                
-            admin_exists = tblAdministradores.query.filter_by(email=email).first() is not None
-            if admin_exists:
-                return jsonify({"error": "Usuario ya esta registrado"}), 409
-                
-            hashed_clave=bcrypt.generate_password_hash(clave)
+        nombre=request.json['nombre']
+        apellido=request.json['apellido']
+        email=request.json['email']
+        clave=request.json['clave']
             
-            nuevo_admin=tblAdministradores(nombre=nombre, apellido=apellido, email=email,clave=hashed_clave)
-            db.session.add(nuevo_admin)
-            db.session.commit()
-            message = json.dumps({"message": "usuario creado", "usuario": admin_schema.dump(nuevo_admin) })
-            return Response(message, status=201, mimetype='application/json')
+        admin_exists = tblAdministradores.query.filter_by(email=email).first() is not None
+        if admin_exists:
+            return jsonify({"error": "Usuario ya esta registrado"}), 409
+            
+        hashed_clave=bcrypt.generate_password_hash(clave)
+        
+        nuevo_admin=tblAdministradores(nombre=nombre, apellido=apellido, email=email,clave=hashed_clave)
+        db.session.add(nuevo_admin)
+        db.session.commit()
+        message = json.dumps({"message": "usuario creado", "usuario": admin_schema.dump(nuevo_admin) })
+        return Response(message, status=201, mimetype='application/json')
 
 class RecursoUnAdmin(Resource):
     def get(self,id_tblAdministradores):

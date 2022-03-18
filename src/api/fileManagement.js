@@ -1,38 +1,32 @@
 import { URL_STORE_AUDIOS, URL_STORE_IMAGES } from "../utils/constants";
-export function uploadAudio(e) {
-  //--------El Reader Onload-------------------------------
-  var file = e.target[3].files[0];
 
-  return new Promise((resolve, reject) => {
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function (e) {
-      //.. once finished..
-      const url = URL_STORE_AUDIOS;
-      const params = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-        },
-        body: file,
-      };
-      //Esta es la promesa
-      fetch(url, params) //send to Api
-        .then((response) => {
-          console.log({ "Response del file management": response });
-          return response.json();
-        })
-        .then((result) => {
-          resolve(result);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    };
-  });
+export function uploadAudio(e) {
+  const url = URL_STORE_AUDIOS;
+var file = e.target[3].files[0];
+
+  const formData = new FormData();
+
+  formData.append('file',file)
+  const params = {
+    method: "POST",
+    body: formData,
+  };
+
+  return fetch(url, params)
+    .then((response) => {
+      console.log({"Esto es lo que resuelve":response})
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      return err;
+    });
 }
+
+
+
 
 export function uploadImage(e) {
   //--------El Reader Onload-------------------------------

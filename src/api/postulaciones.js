@@ -66,3 +66,28 @@ export function getPostulacionesByIdApi(idConcurso){
       return err;
     });
 }
+
+
+
+
+
+export function createPostulacionApi(concurso) {
+  const url = `${API_HOST}/api/locutores`;
+  const token = getTokenApi();
+  const params = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(concurso),
+  };
+
+  return fetch(url, params).then((response) => {
+    if (response.status >= 200 && response.status < 300) {
+      return response.json();
+    }
+  });
+}

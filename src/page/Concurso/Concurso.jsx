@@ -16,7 +16,7 @@ export default function Concurso() {
           <DetallesConcurso urlConc={urlConc} />
         </ConcursosLayout>
       ) : (
-          <DetallesConcurso urlConc={urlConc} />
+        <DetallesConcurso urlConc={urlConc} />
       )}
     </div>
   );

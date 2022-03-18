@@ -42,8 +42,10 @@ def upload_audio():
             return redirect(request.url)
         if file and allowed_audio(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_AUDIO_FOLDER'], filename))
-            message =  json.dumps({"message": "Audio subido Exitosamente"})
+            pathStorage = os.path.join(app.config['UPLOAD_AUDIO_FOLDER'], filename)
+            file.save(pathStorage)
+            message =  json.dumps({"message": "Audio subido Exitosamente",
+                                   "path":pathStorage})
             return Response(message, status=201, mimetype='application/json')
         
 

@@ -1,6 +1,6 @@
 // export const API_HOST = "http://127.0.0.1:5000";
-// export const API_HOST = "http://18.191.34.139:8000";
-export const API_HOST = "http://127.0.0.1:5000";//Local machine ONLY FOR TESTING
+export const API_HOST = "http://18.191.34.139:8000";
+// export const API_HOST = "http://127.0.0.1:5000";//Local machine ONLY FOR TESTING
 
 export const TOKEN = "token";
 export const USERID = "userid";

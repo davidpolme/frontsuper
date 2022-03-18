@@ -9,7 +9,6 @@ export default function BasicTable() {
 
   useEffect(() => {
     getPostulacionesByIdApi().then((response) => {
-      console.log({ "Concursos particulares": response });
       setDataPostulaciones(response);
       setDataisLoaded(true);
     });
@@ -36,17 +35,20 @@ export default function BasicTable() {
             {!dataPostulaciones ? (
               <h1>Actualmente no hay postulaciones para este concurso</h1>
             ) : (
+                  
+              
               dataPostulaciones.map((postulacion) => {
+                // console.log(postulacion);
                 return (
                   <tr key={postulacion.id}>
                     <td>{postulacion.id}</td>
-                    <td>{postulacion.nombre + ' ' + postulacion.apellido}</td>
+                    <td>{postulacion.nombre + " " + postulacion.apellido}</td>
                     <td>{postulacion.email}</td>
                     <td>{postulacion.observaciones}</td>
                     <td>{postulacion.nombreArchivo}</td>
                     <td>
                       <audio controls>
-                        <source src="/" />
+                        <source src={postulacion.pathArchivo} />
                       </audio>
                     </td>
                     <td>Descargar audio</td>
@@ -55,27 +57,7 @@ export default function BasicTable() {
               })
             )}
           </tbody>
-          {/*  <tbody>
-          {data_postulaciones.map((postulacion) => {
-            console.log("postulacion" + postulacion);
-            if (postulacion) {
-              return (
-                <tr key={postulacion.id}>
-                  <td>{postulacion.id}</td>
-                  <td>{postulacion.nombre + " " + postulacion.apellido}</td>
-                  <td>{postulacion.email}</td>
-                  <td>{postulacion.observaciones}</td>
-                  <td>{postulacion.nombreArchivo}</td>
-                  <td>
-                  <audio controls>
-                      <source src={postulacion.pathArchivo} />
-                    </audio>
-                  </td>
-                </tr>
-                );
-            }
-          })}
-        </tbody> */}
+      
         </Table>
       )}
     </>

@@ -23,7 +23,6 @@ export default function DetallesConcurso(props) {
       .then((response) => {
         setResponseItems(response);
         setExistData(true);
-        console.log({'Response':response});
         
         if (response.length <= 0) {
           toast.info("Aun no hay ninguna Postulación");
@@ -49,7 +48,6 @@ export default function DetallesConcurso(props) {
       >
         Crear Nueva Postulación
       </Button>
-      {console.log({ "Response Items ": responseItems })}
       {existData ? <BasicTable/> : <h2>Aún no hay postulaciones</h2>}
 
       <BasicModal show={showModal} setShowModal={setShowModal}>

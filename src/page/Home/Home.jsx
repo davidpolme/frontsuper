@@ -27,7 +27,7 @@ export default function Home() {
 
         setResponseItems(response.concursos);
         setExistData(true);
-        console.log({'Home Resources':response})
+        // console.log({'Home Resources':response})
 
         if (response.concursos.length <= 0) {
           toast.info("Aun no hay ningun Concurso");

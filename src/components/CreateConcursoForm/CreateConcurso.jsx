@@ -27,7 +27,7 @@ export default function CreateConcurso(props) {
 
     uploadImage(e)
     .then((response) => {
-      console.log(response)
+      console.log({"Response en upload Image":response})
         return response;
       })
       .then(() => {
@@ -43,7 +43,7 @@ export default function CreateConcurso(props) {
           admin_id: getUserIDApi(),
         };
 
-        console.log(nuevoConcurso);
+        
         createConcursoApi(nuevoConcurso)
           .then((res) => {
             toast.success("Concurso creado");

@@ -55,7 +55,7 @@ export function signInApi(user){
     }
     return {message: "usuario o contraseña incorrectos"}
   }).then(result => {
-    console.log(result);
+    // console.log(result);
     return result ;
   }).catch(err => {
     return err
